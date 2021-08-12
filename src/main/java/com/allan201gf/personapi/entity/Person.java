@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class Person {
 
     @Column(nullable = false, unique = true) //não pode ser cadastrado mais de um CPF
     private String cpf;
-
 
     private LocalDate birthDate;
 
