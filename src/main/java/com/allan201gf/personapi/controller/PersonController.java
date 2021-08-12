@@ -1,17 +1,29 @@
 package com.allan201gf.personapi.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.allan201gf.personapi.dto.response.MessageResponseDTO;
+import com.allan201gf.personapi.entity.Person;
+import com.allan201gf.personapi.repository.PersonRepository;
+import com.allan201gf.personapi.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/people")
+@RequestMapping("api/v1/people")
 public class PersonController {
 
-    @GetMapping
-    public String getBook() {
-        return "API TEST!";
+    private PersonService personService;
+
+    @Autowired
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) // Retorna código 201
+    public MessageResponseDTO createPerson(@RequestBody Person person) { //Informa que esta vindo uma requisição do tipo pessoas
+        return personService.createPerson(person);
     }
 
 }

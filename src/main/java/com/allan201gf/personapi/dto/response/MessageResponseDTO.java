@@ -1,2 +1,13 @@
-package com.allan201gf.personapi.dto.response;public class MessageResponseDTO {
+package com.allan201gf.personapi.dto.response;
+
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class MessageResponseDTO {
+
+    private String message;
+
 }

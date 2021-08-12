@@ -1,2 +1,16 @@
-package com.allan201gf.personapi.enums;public class PhoneType {
+package com.allan201gf.personapi.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum PhoneType {
+
+    HOME("Home"),
+    MOBILE("Mobile"),
+    COMMERCIAL("Commercial");
+
+    private final String description;
+
 }
