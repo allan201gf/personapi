@@ -4,6 +4,7 @@ package com.allan201gf.personapi.controller;
 import com.allan201gf.personapi.dto.request.PersonDTO;
 import com.allan201gf.personapi.dto.response.MessageResponseDTO;
 import com.allan201gf.personapi.entity.Person;
+import com.allan201gf.personapi.exception.PersonNotFoundException;
 import com.allan201gf.personapi.repository.PersonRepository;
 import com.allan201gf.personapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> listAll() {
         return personService.listAll();
+    }
+
+    @GetMapping("{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
 
 }

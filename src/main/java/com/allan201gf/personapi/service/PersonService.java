@@ -4,12 +4,14 @@ import com.allan201gf.personapi.dto.request.PersonDTO;
 import com.allan201gf.personapi.dto.response.MessageResponseDTO;
 import com.allan201gf.personapi.entity.Person;
 
+import com.allan201gf.personapi.exception.PersonNotFoundException;
 import com.allan201gf.personapi.mapper.PersonMapper;
 import com.allan201gf.personapi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service // indica ao Spring que as regras de negócio estarão aqui
@@ -42,4 +44,15 @@ public class PersonService {
                 .map(personMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Optional<Person> optionalPerson = personRepository.findById(id);
+
+        if (optionalPerson.isEmpty()) {
+            throw new PersonNotFoundException(id);
+        }
+
+        return personMapper.toDTO(optionalPerson.get());
+    }
+
 }
